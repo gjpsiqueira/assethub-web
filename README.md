@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🚀 AssetHub Frontend
 
-## Getting Started
 
-First, run the development server:
+AssetHub é uma plataforma de investimentos focada em análise inteligente de ações, usando dados de mercado + IA pra ajudar o investidor a tomar decisões melhores — sem achismo, sem ruído, só sinal.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Este repositório contém o frontend web da plataforma.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🎯 O que é o AssetHub?
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Em poucas palavras:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Dados financeiros + Inteligência Artificial + UX clean = decisões mais inteligentes.
 
-## Learn More
+No detalhe:
 
-To learn more about Next.js, take a look at the following resources:
+📊 Visualização clara de dados de ações (Brasil-first)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🤖 Análises geradas por IA (fundamentalista, técnica e contextual)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🧠 Insights acionáveis, não só números
 
-## Deploy on Vercel
+🌑 Interface moderna em dark mode
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+⚡ Performance e SEO como first-class citizens
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🧱 Stack Principal
+
+Aqui não tem gambiarra, é stack de gente grande:
+
+Next.js (App Router)
+
+TypeScript
+
+Tailwind CSS
+
+React Server Components
+
+Server Actions
+
+Vercel
+
+Integração com APIs próprias da AssetHub
+
+Auth via Cognito (JWT)
