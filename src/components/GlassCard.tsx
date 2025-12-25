@@ -12,8 +12,9 @@ export default function GlassCard({ title, description, children, className }: G
   return (
     <div
       className={cn(
-        "glass glass-border glass-highlight relative rounded-3xl p-6 text-slate-100 transition duration-300",
-        "hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)]",
+        "glass glass-border glass-highlight relative rounded-3xl border border-white/10 bg-white/5 p-6 text-slate-100",
+        "shadow-[0_18px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl transition duration-300",
+        "hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.4)]",
         className
       )}
     >

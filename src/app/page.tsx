@@ -1,109 +1,152 @@
+"use client";
+
 import Link from "next/link";
 import GlassCard from "@/components/GlassCard";
+import SearchInput from "@/components/SearchInput";
+import { InstantSearchNext } from "react-instantsearch-nextjs";
+import { searchClient, indexName } from "@/lib/algolia";
 
-const features = [
+const trending = [
+  { ticker: "PETR4", name: "Petrobras", change: "+1.2%" },
+  { ticker: "VALE3", name: "Vale", change: "-0.4%" },
+  { ticker: "ITUB4", name: "Itaú Unibanco", change: "+0.8%" },
+  { ticker: "BBDC4", name: "Bradesco", change: "-1.1%" },
+  { ticker: "WEGE3", name: "WEG", change: "+2.3%" },
+  { ticker: "MGLU3", name: "Magazine Luiza", change: "+3.9%" }
+];
+
+const opportunities = [
+  { title: "Valor", ticker: "BBAS3", note: "Desconto vs. média setorial", tag: "Value" },
+  { title: "Crescimento", ticker: "LWSA3", note: "Receita 20% CAGR", tag: "Growth" },
+  { title: "Dividendos", ticker: "TAEE11", note: "Dividend yield resiliente", tag: "Dividend" }
+];
+
+const movers = [
+  { ticker: "RDOR3", name: "Rede D'Or", change: "+4.6%" },
+  { ticker: "CVCB3", name: "CVC", change: "-3.1%" },
+  { ticker: "SUZB3", name: "Suzano", change: "+2.8%" },
+  { ticker: "AMER3", name: "Americanas", change: "-5.4%" }
+];
+
+const aiAnalyses = [
   {
-    title: "Dados de mercado",
-    description: "Cotações, volume e variação em tempo real para acompanhar o pulso do mercado.",
-    points: ["Radar de liquidez e movimento de preço", "Alertas de volatilidade inteligente", "Curadoria visual de indicadores"]
+    ticker: "PETR4",
+    title: "Fluxo de caixa e hedge",
+    summary: "IA destaca hedge cambial e curva de Brent estabilizando margens no curto prazo."
   },
   {
-    title: "Análise com IA",
-    description: "Contexto acionável com linguagem natural e resumos claros para o time decidir rápido.",
-    points: ["Resumo executivo de fatos relevantes", "Detecção de sentimento em notícias", "Sugestões de próximos passos"]
+    ticker: "VALE3",
+    title: "Demanda de aço e China",
+    summary: "Modelo sinaliza melhora moderada em pedidos spot e frete mais baixo no trimestre."
   },
   {
-    title: "Histórico e contexto",
-    description: "Linha do tempo de eventos e métricas para entender o porquê por trás dos números.",
-    points: ["Comparativos por setor e índice", "Marcos corporativos e governança", "Timeline de resultados e calls"]
+    ticker: "ITUB4",
+    title: "Crédito e inadimplência",
+    summary: "IA projeta leve compressão de margem com mix mais conservador e NPL estável."
   }
 ];
 
 export default function HomePage() {
   return (
-    <div className="space-y-12">
-      <section className="grid gap-10 lg:grid-cols-2 lg:items-center">
+    <div className="space-y-14">
+      <section className="mx-auto grid max-w-6xl gap-10 rounded-[32px] border border-white/10 bg-white/5 px-8 py-10 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-200 shadow-lg shadow-black/30">
-            <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)]" />
-            Plataforma em beta privado
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-sm text-slate-200/90">
+            <span className="text-emerald-300">↗</span> Plataforma de Análise Inteligente
           </div>
           <div className="space-y-3">
-            <p className="text-sm uppercase tracking-[0.25em] text-slate-400">AssetHub</p>
             <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              Insights de ações com dados + IA
+              Invista com
+              <br />
+              Inteligência Artificial
             </h1>
-            <p className="max-w-xl text-lg text-slate-200/80">
-              Monitore tickers, acompanhe eventos e receba análises claras com visual líquido e elegante.
+            <p className="max-w-xl text-base text-slate-200/80">
+              Receba recomendações de compra e venda baseadas em algoritmos avançados. Analise ações da B3 com precisão e potencialize seus investimentos.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/acoes/PETR4"
-              className="group inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5 hover:bg-white"
-            >
-              Explorar PETR4
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </Link>
+          <div className="flex flex-wrap gap-2 text-sm text-slate-200">
+            <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1">Dados em tempo real</span>
+            <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1">Análise fundamentalista</span>
+            <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1">Recomendações por IA</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/auth"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/20"
+              className="inline-flex items-center gap-2 rounded-full bg-[#2f7af8] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#2f7af8]/40 transition hover:-translate-y-0.5 hover:bg-[#256ae0]"
             >
-              Entrar
-              <span className="text-white/70">(modal)</span>
+              Começar gratuitamente
             </Link>
-          </div>
-          <div className="flex flex-wrap gap-3 text-sm text-slate-300/80">
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Dados mockados para demo</span>
-            <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-emerald-200">IA no roadmap</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Sem login obrigatório</span>
+            <span className="text-sm text-slate-300/80">Experiência premium com dados seguros.</span>
           </div>
         </div>
-        <div className="relative">
-          <div className="absolute -left-10 -top-10 h-32 w-32 rounded-full bg-emerald-400/20 blur-3xl" />
-          <div className="absolute -right-6 top-8 h-28 w-28 rounded-full bg-indigo-400/20 blur-3xl" />
-          <GlassCard
-            title="Radar inteligente"
-            description="Curadoria visual para acompanhar o mercado com clareza."
-            className="relative overflow-hidden"
-          >
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200/90">
-                <p className="text-xs uppercase tracking-[0.2em] text-emerald-200">Momentum</p>
-                <p className="mt-2 text-2xl font-semibold text-white">+1.4%</p>
-                <p className="text-slate-300/70">Variação diária PETR4</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200/90">
-                <p className="text-xs uppercase tracking-[0.2em] text-sky-200">Volume</p>
-                <p className="mt-2 text-2xl font-semibold text-white">21.4M</p>
-                <p className="text-slate-300/70">Negócios nas últimas 24h</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200/90 sm:col-span-2">
-                <p className="text-xs uppercase tracking-[0.2em] text-purple-200">Eventos</p>
-                <p className="mt-2 text-base text-slate-200">
-                  Radar de fatos relevantes, atas e sentimento de notícias com resumo executivo.
-                </p>
-              </div>
+
+        <div className="space-y-4">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-inner shadow-black/30">
+            <InstantSearchNext searchClient={searchClient} indexName={indexName}>
+              <SearchInput />
+            </InstantSearchNext>
+          </div>
+          <div className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p className="text-sm font-semibold text-white">Ações em destaque:</p>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { ticker: "SHUL4", color: "bg-sky-400" },
+                { ticker: "BPAC3", color: "bg-indigo-400" }
+              ].map((item) => (
+                <button
+                  key={item.ticker}
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white"
+                >
+                  <span className={`h-2 w-2 rounded-full ${item.color}`} />
+                  {item.ticker}
+                </button>
+              ))}
             </div>
-          </GlassCard>
+          </div>
+          <div className="space-y-2 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200/85">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-emerald-300" />
+              Busca inteligente de tickers B3.
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-cyan-300" />
+              Dados curados e visual translúcido.
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-indigo-300" />
+              Insights rápidos para decidir com confiança.
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <GlassCard key={feature.title} title={feature.title} description={feature.description}>
-            <ul className="mt-4 space-y-2 text-sm text-slate-200/80">
-              {feature.points.map((point) => (
-                <li
-                  key={point}
-                  className="flex items-start gap-2 rounded-xl border border-white/5 bg-white/5 px-3 py-2"
-                >
-                  <span className="mt-1 h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(52,211,153,0.8)]" />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </GlassCard>
+      <section className="space-y-3 text-center">
+        <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Recursos premium</p>
+        <h2 className="text-3xl font-semibold text-white">Ferramentas que dão vantagem competitiva</h2>
+        <p className="text-sm text-slate-300/80">Construa confiança com produtos de investimento</p>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {[
+          {
+            title: "Portfolio Intelligence",
+            description: "Acompanhe retornos reais, avaliação e perspectivas da comunidade."
+          },
+          {
+            title: "Relatórios Visuais",
+            description: "Economize tempo obtendo todos os detalhes para decisões informadas."
+          },
+          {
+            title: "Ideias de Investimento",
+            description: "Inspire-se e encontre ações vencedoras em qualquer ciclo de mercado."
+          },
+          {
+            title: "Atualizações Inteligentes",
+            description: "Receba insights concisos e oportunos que realmente importam."
+          }
+        ].map((card) => (
+          <GlassCard key={card.title} title={card.title} description={card.description} />
         ))}
       </section>
     </div>

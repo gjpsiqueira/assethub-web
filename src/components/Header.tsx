@@ -3,32 +3,51 @@ import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 const links = [
-    { href: "/", label: "Home" },
-    { href: "/acoes/PETR4", label: "Exemplo" },
-    { href: "/auth", label: "Entrar" }
+        { href: "/", label: "Planos" },
+        { href: "#", label: "Análises por IA" },
+        { href: "#", label: "Portfólio" },
+        { href: "#", label: "Sobre" }
 ];
 
 export default function Header() {
-    return (
-        <header className="sticky top-0 z-50 w-full overflow-x-hidden gradient-bg-blue backdrop-blur supports-backdrop-filter:bg-white/10">
-            <div className="mx-auto w-full max-w-screen px-[4vw] sm:px-4 md:px-5 py-[3vw] sm:py-3">
-                <div className="flex w-full flex-wrap items-center justify-between gap-2 md:gap-4">
-                    {/* Logo - sempre visível */}
-                    <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                        <Link href="/" className="cursor-pointer inline-flex items-center gap-1.5 sm:gap-2" aria-label="Ir para página inicial">
-                            <Image
-                                src="/white_bull_logo.png"
-                                alt="AssetHub Logo"
-                                width={36}
-                                height={36}
-                                className="sm:w-10 sm:h-10"
-                                priority
-                            />
-                            <span className="text-xl sm:text-2xl font-bold text-white">AssetHub</span>
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </header>
-    );
+        return (
+                <header className="sticky top-0 z-50 w-full bg-[#1f5de9] shadow-md">
+                        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3">
+                                <Link href="/" className="flex items-center gap-2" aria-label="Ir para página inicial">
+                                        <Image src="/blue_bull_logo.png" alt="AssetHub Logo" width={28} height={28} priority />
+                                        <span className="text-lg font-semibold text-white">AssetHub</span>
+                                </Link>
+
+                                <nav className="hidden items-center gap-4 text-sm font-semibold text-white/90 md:flex">
+                                        {links.map((link) => (
+                                                <Link key={link.label} href={link.href} className="hover:text-white">
+                                                        {link.label}
+                                                </Link>
+                                        ))}
+                                </nav>
+
+                                <div className="flex items-center gap-3">
+                                        <button
+                                                type="button"
+                                                className="hidden h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 md:flex"
+                                                aria-label="Buscar"
+                                        >
+                                                <span className="text-lg">🔍</span>
+                                        </button>
+                                        <Link
+                                                href="/auth"
+                                                className="hidden rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/15 md:inline-flex"
+                                        >
+                                                Entrar
+                                        </Link>
+                                        <Link
+                                                href="/auth"
+                                                className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#1f5de9] transition hover:bg-slate-100"
+                                        >
+                                                Cadastre-se
+                                        </Link>
+                                </div>
+                        </div>
+                </header>
+        );
 }
