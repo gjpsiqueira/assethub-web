@@ -1,5 +1,7 @@
 "use client";
 
+import { FcGoogle } from "react-icons/fc";
+import { FaApple, FaFacebookF } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { useState, type InputHTMLAttributes } from "react";
 import { cn } from "@/lib/cn";
@@ -7,9 +9,32 @@ import { cn } from "@/lib/cn";
 type Mode = "login" | "signup";
 
 const socialProviders = [
-  { key: "google", label: "Sign in with Google", shortLabel: "Continue with Google" },
-  { key: "apple", label: "Sign in with Apple", shortLabel: "Continue with Apple" },
-  { key: "facebook", label: "Sign in with Facebook", shortLabel: null }
+  {
+    key: "google",
+    label: "Sign in with Google",
+    shortLabel: "Continue with Google",
+    icon: <FcGoogle className="h-7 w-7" aria-hidden="true" />
+  },
+  {
+    key: "apple",
+    label: "Sign in with Apple",
+    shortLabel: "Continue with Apple",
+    icon: (
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-white text-lg" aria-hidden="true">
+        <FaApple className="h-4 w-4" />
+      </span>
+    )
+  },
+  {
+    key: "facebook",
+    label: "Sign in with Facebook",
+    shortLabel: null,
+    icon: (
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1b74e4] text-white text-lg font-semibold" aria-hidden="true">
+        <FaFacebookF className="h-4 w-4" />
+      </span>
+    )
+  }
 ];
 
 export default function AuthModal() {
@@ -51,7 +76,7 @@ export default function AuthModal() {
                     <SocialButton
                       key={provider.key}
                       label={isSignup && provider.shortLabel ? provider.shortLabel : provider.label}
-                      iconKey={provider.key}
+                      icon={provider.icon}
                     />
                   ))}
                 </div>
@@ -146,17 +171,13 @@ function TabButton({ label, active, onClick }: { label: string; active: boolean;
   );
 }
 
-function SocialButton({ label, iconKey }: { label: string; iconKey: "google" | "apple" | "facebook" }) {
+function SocialButton({ label, icon }: { label: string; icon: JSX.Element }) {
   return (
     <button
       type="button"
       className="flex w-full items-center justify-center gap-3 rounded-xl border-2 border-slate-400 px-4 py-3.5 text-base font-semibold text-slate-900 transition hover:bg-slate-50"
     >
-      <span className={cn("flex h-7 w-7 items-center justify-center rounded-full text-lg", iconKey === "google" && "bg-white", iconKey === "apple" && "bg-black text-white", iconKey === "facebook" && "bg-[#1b74e4] text-white")}>
-        {iconKey === "google" && "G"}
-        {iconKey === "apple" && "A"}
-        {iconKey === "facebook" && "f"}
-      </span>
+      {icon}
       <span>{label}</span>
     </button>
   );
