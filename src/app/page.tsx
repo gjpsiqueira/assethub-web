@@ -82,7 +82,11 @@ export default function HomePage() {
 
         <div className="space-y-4">
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-inner shadow-black/30">
-            <InstantSearchNext searchClient={searchClient} indexName={indexName}>
+            <InstantSearchNext
+              searchClient={searchClient}
+              indexName={indexName}
+              future={{ preserveSharedStateOnUnmount: true }}
+            >
               <SearchInput />
             </InstantSearchNext>
           </div>
