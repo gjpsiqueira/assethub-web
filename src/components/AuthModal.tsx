@@ -24,8 +24,8 @@ export default function AuthModal() {
   const visibleProviders = isSignup ? socialProviders.filter((provider) => provider.key !== "facebook") : socialProviders;
 
   return (
-    <div className={cn("w-full px-2", isSignup ? "max-w-6xl" : "max-w-xl")}> 
-      <div className="relative max-h-[calc(100vh-2rem)] overflow-hidden rounded-3xl border border-slate-200 bg-white text-slate-900 shadow-2xl">
+    <div className={cn("w-full px-3 sm:px-4 md:px-6", isSignup ? "max-w-6xl" : "max-w-md sm:max-w-lg")}> 
+      <div className="relative max-h-[calc(100vh-1.5rem)] overflow-auto rounded-3xl border border-slate-200 bg-white text-slate-900 shadow-2xl">
         <button
           type="button"
           onClick={() => router.back()}
@@ -36,16 +36,16 @@ export default function AuthModal() {
         </button>
 
         <div className={cn("grid", isSignup ? "md:grid-cols-2 lg:grid-cols-[1.05fr,0.95fr]" : "grid-cols-1")}> 
-          <div className="p-8 md:p-10 md:overflow-y-auto">
+          <div className="p-6 sm:p-8 md:p-10 md:overflow-y-auto">
             <div className="mx-auto max-w-lg">
-              <div className="mb-6 inline-flex rounded-full border border-slate-300 bg-white text-sm font-semibold shadow-sm">
+              <div className="mb-6 inline-flex flex-wrap rounded-full border border-slate-300 bg-white text-sm font-semibold shadow-sm">
                 <TabButton label="Login" active={!isSignup} onClick={() => setMode("login")} />
                 <TabButton label="Cadastro" active={isSignup} onClick={() => setMode("signup")} />
               </div>
 
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold leading-tight">{isSignup ? "Crie uma conta gratuita" : "Acesse sua conta"}</h2>
+                  <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{isSignup ? "Crie uma conta gratuita" : "Acesse sua conta"}</h2>
                   {!isSignup ? (
                     <p className="text-sm text-slate-600">Acesse com sua conta ou continue com um provedor.</p>
                   ) : null}
@@ -109,7 +109,7 @@ export default function AuthModal() {
           </div>
 
           {isSignup ? (
-            <div className="hidden h-full border-t border-slate-200 bg-[#f4ece4] px-8 py-10 text-slate-900 md:block md:border-l md:border-t-0">
+            <div className="hidden h-full border-t border-slate-200 bg-[#f4ece4] px-6 py-10 text-slate-900 sm:px-8 md:block md:border-l md:border-t-0">
               <div className="flex h-full flex-col space-y-4">
                 <h3 className="text-2xl font-bold leading-snug">Invista com inteligência, não com esforço</h3>
                 <p className="text-lg font-semibold">Tome decisões de investimento bem informadas com a AssetHub</p>
