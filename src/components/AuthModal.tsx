@@ -11,30 +11,10 @@ type Mode = "login" | "signup";
 const socialProviders = [
   {
     key: "google",
-    label: "Sign in with Google",
-    shortLabel: "Continue with Google",
+    label: "Entrar com Google",
+    shortLabel: "Continuar com Google",
     icon: <FcGoogle className="h-7 w-7" aria-hidden="true" />
   },
-  {
-    key: "apple",
-    label: "Sign in with Apple",
-    shortLabel: "Continue with Apple",
-    icon: (
-      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-white text-lg" aria-hidden="true">
-        <FaApple className="h-4 w-4" />
-      </span>
-    )
-  },
-  {
-    key: "facebook",
-    label: "Sign in with Facebook",
-    shortLabel: null,
-    icon: (
-      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1b74e4] text-white text-lg font-semibold" aria-hidden="true">
-        <FaFacebookF className="h-4 w-4" />
-      </span>
-    )
-  }
 ];
 
 export default function AuthModal() {
@@ -65,7 +45,7 @@ export default function AuthModal() {
 
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold leading-tight">{isSignup ? "Create Free Account" : "Member Sign In"}</h2>
+                  <h2 className="text-3xl font-bold leading-tight">{isSignup ? "Crie uma conta gratuita" : "Acesse sua conta"}</h2>
                   {!isSignup ? (
                     <p className="text-sm text-slate-600">Acesse com sua conta ou continue com um provedor.</p>
                   ) : null}
@@ -81,17 +61,17 @@ export default function AuthModal() {
                   ))}
                 </div>
 
-                <Divider label="or" />
+                <Divider label="ou" />
 
                 <form className="space-y-4">
-                  <Input label="Email" type="email" placeholder="you@example.com" />
-                  <Input label="Password" type="password" placeholder="••••••••" />
+                  <Input label="Email" type="email" placeholder="voce@exemplo.com" />
+                  <Input label="Senha" type="password" placeholder="••••••••" />
 
                   <button
                     type="button"
                     className="mt-2 w-full rounded-xl bg-black px-4 py-3 text-base font-semibold text-white shadow-md transition hover:bg-black/85"
                   >
-                    {isSignup ? "Create Account" : "Sign in"}
+                    {isSignup ? "Criar conta" : "Entrar"}
                   </button>
                 </form>
 
@@ -99,28 +79,28 @@ export default function AuthModal() {
                   <p className="text-center">
                     {isSignup ? (
                       <>
-                        Already have an account? {" "}
+                        Já tem uma conta? {" "}
                         <button type="button" onClick={() => setMode("login")} className="font-semibold text-sky-700 hover:underline">
-                          Sign in
+                          Entrar
                         </button>
                       </>
                     ) : (
                       <>
-                        Don&apos;t have an account? {" "}
+                        Não tem uma conta? {" "}
                         <button type="button" onClick={() => setMode("signup")} className="font-semibold text-sky-700 hover:underline">
-                          Create free account
+                          Criar conta gratuita
                         </button>
                       </>
                     )}
                   </p>
 
                   <p className="text-xs leading-5 text-slate-500">
-                    By signing {isSignup ? "up" : "in"} using any of the options above, you agree to the Terms of Use & Privacy Policy.
+                    Ao {isSignup ? "criar sua conta" : "entrar"} usando qualquer opção acima, você concorda com os Termos de Uso e a Política de Privacidade.
                   </p>
 
                   {!isSignup ? (
                     <p className="text-xs leading-5 text-slate-500">
-                      Forgot password? Reset it or request a sign in link. Other issues? contact@assethub.com
+                      Esqueceu a senha? Redefina ou solicite um link de acesso. Outros problemas? contact@assethub.com
                     </p>
                   ) : null}
                 </div>
@@ -131,21 +111,21 @@ export default function AuthModal() {
           {isSignup ? (
             <div className="hidden h-full border-t border-slate-200 bg-[#f4ece4] px-8 py-10 text-slate-900 md:block md:border-l md:border-t-0">
               <div className="flex h-full flex-col space-y-4">
-                <h3 className="text-2xl font-bold leading-snug">Invest Smarter, Not Harder</h3>
-                <p className="text-lg font-semibold">Make informed investment decisions with AssetHub</p>
+                <h3 className="text-2xl font-bold leading-snug">Invista com inteligência, não com esforço</h3>
+                <p className="text-lg font-semibold">Tome decisões de investimento bem informadas com a AssetHub</p>
 
                 <ul className="space-y-3 text-base">
-                  <Benefit icon="📢" text="Get unlimited access to breaking stock news" />
-                  <Benefit icon="📰" text="Subscribe to tailored newsletters for your interests" />
-                  <Benefit icon="📊" text="Create multiple portfolios and track your favorite stocks" />
+                  <Benefit icon="📢" text="Acesse notícias urgentes do mercado sem limites" />
+                  <Benefit icon="📰" text="Assine newsletters personalizadas para seus interesses" />
+                  <Benefit icon="📊" text="Crie múltiplas carteiras e acompanhe suas ações favoritas" />
                 </ul>
 
                 <div className="mt-6 rounded-2xl bg-white p-5 shadow-sm">
                   <div className="text-xl text-amber-500">*****</div>
                   <p className="mt-2 text-sm leading-relaxed text-slate-800">
-                    "Excellent reports and analysis and a pleasure to use and access. I highly recommend this site for the best information."
+                    "Relatórios e análises excelentes, além de ser um prazer de usar. Recomendo muito este site pelas melhores informações."
                   </p>
-                  <p className="mt-3 text-xs font-semibold text-slate-600">United States 2025</p>
+                  <p className="mt-3 text-xs font-semibold text-slate-600">Estados Unidos 2025</p>
                 </div>
               </div>
             </div>
@@ -175,7 +155,7 @@ function SocialButton({ label, icon }: { label: string; icon: JSX.Element }) {
   return (
     <button
       type="button"
-      className="flex w-full items-center justify-center gap-3 rounded-xl border-2 border-slate-400 px-4 py-3.5 text-base font-semibold text-slate-900 transition hover:bg-slate-50"
+      className="flex w-full items-center justify-center gap-3 rounded-xl border-2 border-slate-400 px-4 py-3 text-base font-semibold text-slate-900 transition hover:bg-slate-50"
     >
       {icon}
       <span>{label}</span>
