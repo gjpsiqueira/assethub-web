@@ -18,6 +18,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html {
+  background-color: #05070f;
+}
+
 .bg-aurora {
   position: relative;
   background: radial-gradient(circle at 20% 20%, rgba(135, 206, 235, 0.16), transparent 32%),

@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className="dark">
-      <body className={`${display.variable} bg-aurora text-slate-50`}>
+      <body className={`${display.variable} bg-[#05070f] text-slate-50 min-h-screen`}>
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="relative mx-auto w-full max-w-6xl flex-1 px-6 pb-16 pt-28">
